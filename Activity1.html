@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Conversions</title>
+<style>
+     body {
+            padding: 0;
+            margin: 0;
+            background-color: #333;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #b72626;
+            width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0px 0px 40px #000;
+        }
+        h1 {
+            text-transform: uppercase;
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        input {
+            display: block;
+            width: 300px;
+            height: 45px;
+            border: none;
+            background: #dedede;
+            border-radius: 0%;
+            box-shadow: 0px 0px 20px #262626;
+            margin: 0 auto;
+            outline: none;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Lucida Sans';
+            text-align: center;
+        }
+        p {
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        label {
+            color: #dedede;
+            margin-top: 75px;
+            margin-left: 50px;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        .toggle {
+            float:center;
+            width: 20px;
+            height: 20px;
+            padding: 4px;
+            text-align:right;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            margin: auto 10px;
+        }
+        .toggle:hover {
+            cursor: pointer;
+            -webkit-box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+            box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+        }
+
+        .toggle:checked {
+            -webkit-box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+            box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+        }
+        .toggle:after {
+            content: '';
+            text-shadow: 0 -1px 0 #bfbfbf;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            float: left;
+            margin: auto;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+        }
+        .toggle:checked:after {
+            color: #85ada7;
+            text-shadow: 0 1px 0 #669991;
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Assignments
+      <i class="fa fa-caret-down"></i>
+    </button> 
+    <div class="dropdown-content">
+        <a href="Activity1.html" > Conversion</a>
+        <a href="Activity2.html" > Income Tax Calculator</a>
+        <a href="Activity3.html"> First N Natural Numbers</a>
+        <a href="Activity4.html"> Payroll</a>
+    </div>
+</div>
+</div>
+
+
+<div class= "container">
+<h1> Conversion </h1>
+<p> Enter a number</p>
+<input id="n1" type="text" onkeyup="Conv()"></input>
+<p> Output</p>
+<input id="ans" type="text" readonly></input><br>
+      <input type="radio" name="formula" id="FahCel" class="toggle"></input>
+      <label for="FahCel">Fahrenheit to Celcius</label>
+      <input type="radio" name="formula" id="CelFah" class="toggle"></input>
+      <label for="CelFah">Celcius to Fahrenheit</label>
+      <input type="radio" name="formula" id="MetFeet" class="toggle"></input>
+      <label for="MetFeet">Meters to Feet</label>
+      <input type="radio" name="formula" id="FeetMet" class="toggle"></input>
+      <label for="FeetMet">Feet to Meters</label>
+</div>
+</body>
+<script>
+    function Conv(){
+  var n = document.getElementById("n1").value;
+  var formula1 = document.getElementById("FahCel");
+  var formula2 = document.getElementById("CelFah");
+  var formula3 = document.getElementById("MetFeet");
+  var formula4 = document.getElementById("FeetMet");
+  
+  if(formula1.checked==true){ 
+    var form1 = (n - 32) * 5 / 9;
+   document.getElementById("ans").value = form1 + String.fromCharCode(176) + "F" ;
+  }
+  else if(formula2.checked==true){
+    var form2 = (n * 1.8) + 32;
+    document.getElementById("ans").value =  form2 + String.fromCharCode(176) + "C";
+  }
+  else if(formula3.checked==true){
+    var form3 = n * 3.2808;
+    document.getElementById("ans").value = form3 + " Ft";
+  }
+  else if(formula4.checked==true){
+    var form4 = n * 0.3408;
+    document.getElementById("ans").value = form4 + " M";
+  }
+}
+</script>
+</body>
+</html>

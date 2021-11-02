@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The First N Numbers</title>
+<style>
+     body {
+            padding: 0;
+            margin: 0;
+            background-color: #333;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #b72626;
+            width: 500px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0px 0px 40px #000;
+        }
+        h1 {
+            text-transform: uppercase;
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        h2 {
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        label {
+            text-transform: uppercase;
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        p {
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        input {
+            display: block;
+            width: 75px;
+            height: 75px;
+            border: none;
+            background: #dedede;
+            border-radius: 50%;
+            box-shadow: 0px 0px 20px #262626;
+            margin: 0 auto;
+            outline: none;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Lucida Sans';
+            text-align: center;
+        }
+        button {
+          background: #000;
+            padding: 8px;
+            border: none;
+            color: #fff;
+            font-family: 'Lucida Sans';
+            margin-left: 215px;
+            margin-top: 15px;
+            outline: none;
+            cursor: pointer;
+            transition: .5s;
+        }
+        button:hover{
+            background: #333;
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Assignments
+      <i class="fa fa-caret-down"></i>
+    </button> 
+    <div class="dropdown-content">
+        <a href="Activity1.html" > Conversion</a>
+        <a href="Activity2.html" > Income Tax Calculator</a>
+        <a href="Activity3.html"> First N Natural Numbers</a>
+        <a href="Activity4.html"> Payroll</a>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+<h1> First N Natural Numbers</h1>
+<p> Input a value: </p>
+<input id="n1" type="number"></input>
+<button onclick="Nnum()">Compute</button>
+
+<h2 id="title1"></h2>
+<p id="fac"></p>
+<h2 id="title2"></h2>
+<p id="sum"></p>
+<h2 id="title3"></h2>
+<p id="ave"></p>
+
+</div>
+
+<script>
+function Nnum() {
+    var n = document.getElementById("n1").value*1;
+    
+    var loop,fac;
+    
+    loop=1;
+    fac=1;
+
+    while(loop <= n) {
+        fac = fac * loop;
+        loop++
+    }
+    document.getElementById("title1").innerHTML=
+      "The Factorial of "+n+" is:";
+    document.getElementById("fac").innerHTML=fac;
+
+   var loop2,sum;
+
+    loop2=1;
+    sum=0;
+    do {
+        sum = loop2 + sum;
+        loop2++;
+    } while(loop2 <= n) 
+    
+    document.getElementById("title2").innerHTML=
+    "The Sum of the first "+n+" natural numbers is:";
+    document.getElementById("sum").innerHTML=sum;
+    
+    var sum1=0;
+    
+    for(let loop3 = 1; loop3 <= n; loop3++) {
+        sum1 = loop3 + sum1;
+    }
+    var ave = sum1 / n;
+    document.getElementById("title3").innerHTML=
+      "The Average of the first "+n+" natural numbers is:";
+    document.getElementById("ave").innerHTML=ave;
+}
+</script>
+</body>
+
+</html>

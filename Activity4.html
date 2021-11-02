@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payroll</title>
+<style>
+     body {
+            padding: 0;
+            margin: 0;
+            background-color: #333;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .container {
+            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #b72626;
+            width: 1000px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0px 0px 40px #000;
+        }
+        h1 {
+            text-transform: uppercase;
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        h2 {
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1)
+        }
+        label {
+            text-transform: uppercase;
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+            margin-left: 20px;
+        }
+        p {
+            color: #dedede;
+            text-align: center;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+        }
+        input {
+            border: none;
+        }
+        button {
+          background: #000;
+            border: none;
+            color: #fff;
+            font-family: 'Lucida Sans';
+            outline: none;
+            cursor: pointer;
+            transition: .5s;
+        }
+        button:hover{
+            background: #333;
+        }
+        #list {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+
+        }
+        
+        #list td, #list th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #list tr:nth-child(even){background-color: #27292A;}
+        #list tr:nth-child(odd){background-color: #4F575D;}
+             
+        
+        #list th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #000000;
+          color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Assignments
+      <i class="fa fa-caret-down"></i>
+    </button> 
+    <div class="dropdown-content">
+        <a href="Activity1.html" > Conversion</a>
+        <a href="Activity2.html" > Income Tax Calculator</a>
+        <a href="Activity3.html"> First N Natural Numbers</a>
+        <a href="Activity4.html"> Payroll</a>
+    </div>
+  </div>
+</div>
+<body onload="CreateTable()">
+<div class="container">
+<h1> Payroll </h1>
+<label for="emply"> Employee Name: </label>
+<input id="emply"  type="text" oninput="Computation()"></input>
+
+<label for="day"> Days Worked: </label>
+<input id="day" type="number" oninput="Computation()"></input>
+
+<label for="dlyrate"> Daily Rate: </label>
+<input id="dlyrate" type="number" oninput="Computation()"></input><br>
+
+<label for="deduamnt"> Deduction Amount: </label>
+<input id="deduamnt" type="number" onkeyup="Computation()"></input>
+
+<label for="pay"> Payroll: </label>
+<input id="pay" type="number" readonly></input>
+
+<button onclick="AddEmployee()"> Add Employee to the List</button>
+
+<br><label for="noemply"> No of Employees: </label>
+<input id="noemply" type="number" readonly></input>
+
+<button onclick="ClearList()"> Clear List </button>
+
+<label for="rememply"> Remove Employees: </label>
+<input id="rememply" type="number"></input>
+
+<button onclick="RemoveEmployee()"> Remove Employee </button>
+
+<p id="list"></p>
+</div>
+
+<script>
+function CreateTable(){
+    var list=[];
+    document.getElementById("noemply").value=list.length;
+    document.getElementById("list").innerHTML="";
+}
+
+function Computation(){ 
+    var gross, net, deduamnt, day,dlyrate ;
+    deduamnt = document.getElementById("deduamnt").value*1;
+    day = document.getElementById("day").value*1;
+    dlyrate = document.getElementById("dlyrate").value*1; 
+
+    gross = dlyrate*day;
+    net = gross-deduamnt;
+
+    document.getElementById("pay").value=net;
+
+} 
+function ClearList(){
+    var clear =confirm("Delete all employees in the list?");
+
+    if (clear) {
+        CreateTable();  
+    }
+}
+
+function AddEmployee(){ 
+
+  var newemply = {
+    "emply": "1", 
+    "day": 1,
+    "dlyrate": 0,  
+    "deduamnt": 0, 
+    "deductit": function deductit(){
+        return Math.round(this.dlyrate*this.day*100);
+    },
+    "paycomputation": function paycomputation(){
+        return Math.round(this.deductit()-this.deduamnt*100/100);
+    } 
+  };
+  newemply.emply=document.getElementById("emply").value;
+  newemply.day=document.getElementById("day").value;
+  newemply.dlyrate=document.getElementById("dlyrate").value;
+  newemply.deduamnt=document.getElementById("deduamnt").value;
+
+  list.push(newemply);
+
+  document.getElementById("noemply").value=list.length;
+
+  ShowTable();
+}
+  function RemoveEmployee(){
+    var emplynum, del;
+
+    emplynum = document.getElementById("rememply").value;
+    del = confirm("Remove Employee No. " +emplynum+ "?");
+
+    if(del){
+      list.splice(emplynum-1,1);
+      document.getElementById("noemply").value=list.length;
+      ShowTable();
+    } 
+  }
+  function ShowTable(){
+    var theader, tbody, tb, tfooter, emplylength, emplynum, ttext, groamnt, payamnt, loop;
+
+        theader ="<thead>";
+            theader+="<tr>";
+            theader+="<th>No.</th>";
+            theader+='<th style="text-align:left">Employee Name</th>';
+            theader+="<th>Days Worked</th>";
+            theader+='<th style="text-align:right">Daily Rate</th>';
+            theader+='<th style="text-align:right">Gross Pay</th>';
+            theader+='<th style="text-align:right">Deduction Amount</th>';
+            theader+="<th>Net Pay</th>";
+            theader+="</tr>";
+            theader+="</thead>";
+                    
+
+        emplylength= list.length;
+
+      for ( loop = 0, ttext = "", tbody = ''; loop < emplylength; loop++){
+        emplynum = loop + 1;
+
+              tbody += "<tr>"
+                +'<td>'+emplynum+' </td>'
+                +'<td>'+list[loop].emply+' </td>'
+                +'<td style="text-align:right">'+list[loop].day+'</td>'
+                +'<td style="text-align:right">'+list[loop].dlyrate+'</td>'
+                +'<td style="text-align:right">'+list[loop].deductit()+'</td>'       
+                +'<td style="text-align:right">'+list[loop].deduamnt+'</td>'            
+                +'<td style="text-align:right">'+list[loop].paycomputation()+'</td>' 
+                +"</tr>";
+      }     
+      document.getElementById("list").innerHTML="<table>"+theader+tbody+"</table>";
+  }
+  var list =[];
+</script>
+</body>
+</html>
+
+
+
+
+
